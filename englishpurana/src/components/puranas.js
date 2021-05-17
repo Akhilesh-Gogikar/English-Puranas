@@ -46,6 +46,7 @@ function Puranas({propOne, setPage}) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState({'text':[]});
+  const [imgurl, setImgurl] = useState("https://simplepuranas.sgp1.digitaloceanspaces.com/"+propOne.currentPage+".png")
 
   const goIndex = () => {
     history.push('index');
@@ -55,10 +56,12 @@ function Puranas({propOne, setPage}) {
     if(items["next"]){
     setPage(items["next"]);
     var new_url = "https://raw.githubusercontent.com/Akhilesh-Gogikar/English-Puranas/master/puranas_jsons/"+items["next"]+".json"
+    var new_imgurl = "https://simplepuranas.sgp1.digitaloceanspaces.com/"+items["next"]+".png"
   } else {
     history.push('index');
   }
     setUrl(new_url)
+    setImgurl(new_imgurl)
 
     fetch(url)
       .then( res => res.json())
@@ -79,16 +82,19 @@ function Puranas({propOne, setPage}) {
   }
 
   var new_url;
+  var new_imgurl;
 
   // stop audio sound
   const goPrev = () => {
     if(items["prev"]){
       setPage(items["next"]);
     new_url = "https://raw.githubusercontent.com/Akhilesh-Gogikar/English-Puranas/master/puranas_jsons/"+items["prev"]+".json"
+    new_imgurl = "https://simplepuranas.sgp1.digitaloceanspaces.com/"+items["prev"]+".png"
   } else {
     history.push('index');
     }
     setUrl(new_url)
+    setImgurl(new_imgurl)
     fetch(url)
       .then( res => res.json())
       .then(
@@ -153,7 +159,7 @@ function Puranas({propOne, setPage}) {
 
             <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.title}</p>
             <p/>
-            <AsyncImage src="https://upload.wikimedia.org/wikipedia/commons/5/53/Om-hindu_symbol.jpg" />
+            <AsyncImage src={imgurl} />
             <p/>
             <div>{ items.text.map(notification => <p className='red-text-shadow'>{ notification }</p>) }</div>
 
