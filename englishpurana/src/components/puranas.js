@@ -149,7 +149,7 @@ function Puranas({propOne, setPage}) {
     return (
       <div className='App' >
       <Navbar bg="warning" variant="light">
-      <Navbar.Brand href="/" >
+      <Navbar.Brand href="/index" >
         <img
           alt=""
           src={logo}
