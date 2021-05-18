@@ -26,7 +26,7 @@ const AsyncImage = (props) => {
     }, [props.src]);
     if (loadedSrc === props.src) {
         return (
-            <img {...props} />
+            <img {...props} style={{width:"100%"}}/>
         );
     }
     return null;
@@ -149,15 +149,14 @@ function Puranas({propOne, setPage}) {
       <GoogleAd slot="4653616521" timeout={1000} classNames="page-top" />
       <header className="App-header">
       <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.index}</p>
+      <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.title}</p>
       <div className='row'>
           <div className='column left'>
-
-            <input type="button" className="btn btn-primary filldiv" style={{float:"left"}} value="Prev" onClick={goPrev}></input>
           </div>
 
           <div className='middle'>
 
-            <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.title}</p>
+
             <p/>
             <AsyncImage src={imgurl} />
             <p/>
@@ -167,20 +166,32 @@ function Puranas({propOne, setPage}) {
 
           <div className='column right'>
 
-          <input type="button" className="btn btn-primary filldiv" value="Next" onClick={goNext}></input>
-
           </div>
 
       </div>
-      <div className='row'>
-        <div className='column left'>
+      <div class="d-flex" >
+        <div style={{flex:0.5}}>
 
-          <input type="button" className="btn btn-primary" value="Prev" onClick={goPrev}></input>
+          <input type="button" className="btn btn-primary" value="Prev" style={{float:"left"}} onClick={goPrev}></input>
         </div>
-        <div className='column middle'>
+
+        <div style={{flex:2}}>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+
+        </div>
+
+        <div style={{flex:0.5}}>
         <input type="button" className="btn btn-danger" value="Index" style={{float:"center"}} onClick={goIndex}></input>
         </div>
-        <div className='column right'>
+        <div style={{flex:2}}>
+        <p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+
+        </div>
+        <div style={{flex:0.5}}>
 
         <input type="button" className="btn btn-primary " style={{float:"right"}} value="Next" onClick={goNext}></input>
 
