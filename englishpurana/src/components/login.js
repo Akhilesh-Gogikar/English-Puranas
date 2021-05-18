@@ -8,9 +8,10 @@ import {
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd
 } from "@react-firebase/auth";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
 import { config } from "../config";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import { updateUserId } from "../redux/actions";
 import { useHistory } from "react-router-dom";
@@ -33,6 +34,24 @@ function Login({propOne, updateUserId}) {
 
   return (
     <div className="App">
+    <Navbar bg="warning" variant="light">
+    <Navbar.Brand href="/" >
+      <img
+        alt=""
+        src={logo}
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+      />{' '}
+      Simple Puranas
+    </Navbar.Brand>
+    <Navbar.Toggle />
+  <Navbar.Collapse className="justify-content-end">
+    <Navbar.Text>
+    Signed in as: <a href="#login">{propOne.userId.displayName}</a>
+    </Navbar.Text>
+  </Navbar.Collapse>
+  </Navbar>
     <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
     <p style={{textDecoration:"underline"}}>Simple Puranas</p>

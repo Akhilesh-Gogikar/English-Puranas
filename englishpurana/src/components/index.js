@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import GoogleAd from './googleAds';
 
 import logo from '../logo.png';
+import Navbar from "react-bootstrap/Navbar";
 
 function PuranaIndex({propOne, setPage}){
 
@@ -104,6 +105,12 @@ function PuranaIndex({propOne, setPage}){
   // console.log('Index')
   // console.log(items)
 
+  if(elements.length==18){
+    var container="container"
+  } else {
+    var container = ""
+  }
+
   if (error) {
     return <div className='App' >
     <header className="AppHeader">Error: {error.message}
@@ -115,14 +122,30 @@ function PuranaIndex({propOne, setPage}){
     return (
 
       <div className='App' >
+      <Navbar bg="warning" variant="light">
+      <Navbar.Brand href="/" >
+        <img
+          alt=""
+          src={logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />{' '}
+        Simple Puranas
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    <Navbar.Collapse className="justify-content-end">
+      <Navbar.Text>
+      Signed in as: <br/><a href="#login">{propOne.displayName}</a>
+      </Navbar.Text>
+    </Navbar.Collapse>
+    </Navbar>
             <GoogleAd slot="4653616521" timeout={1000} classNames="page-top" />
       <header className="App-header">
 
       <img src={logo} className="App-logo" alt="logo" />
 
-      <p className='red-text-shadow' style={{textDecoration:"underline"}}>Simple Puranas</p>
-
-      <input type="button" className="btn btn-primary" value="Start Reading" onClick={() => goNext()}></input>
+      <input type="button" className="btn btn-warning" value="Start Reading" onClick={() => goNext()}></input>
 
       <p/>
 
@@ -130,7 +153,10 @@ function PuranaIndex({propOne, setPage}){
 
       <br/>
 
-      <div>{ elements.map(notification => <div><input type="button" className="btn btn-primary" value={ notification.title } onClick={() => goNext(notification)}></input><br/></div>) }</div>
+      <div className={container}>{ elements.map(notification => <div><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </p><input type="button" className="btn btn-dark" value={ notification.index } onClick={() => goNext(notification)}></input>
+      <input type="button" className="btn btn-primary" value={ notification.title } onClick={() => goNext(notification)}></input><br/></div>) }</div>
 
       <br/>
 

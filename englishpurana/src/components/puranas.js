@@ -7,6 +7,8 @@ import { setPage, updateSession } from "../redux/actions";
 import { useHistory } from "react-router-dom";
 import { getPage } from "../redux/selectors";
 import GoogleAd from './googleAds';
+import Navbar from "react-bootstrap/Navbar";
+import logo from '../logo.png';
 
 const AsyncImage = (props) => {
     const [loadedSrc, setLoadedSrc] = React.useState(null);
@@ -146,6 +148,24 @@ function Puranas({propOne, setPage}) {
   } else {
     return (
       <div className='App' >
+      <Navbar bg="warning" variant="light">
+      <Navbar.Brand href="/" >
+        <img
+          alt=""
+          src={logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />{' '}
+        Simple Puranas
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    <Navbar.Collapse className="justify-content-end">
+      <Navbar.Text>
+      Signed in as: <br/><a href="#login">{propOne.userId.displayName}</a>
+      </Navbar.Text>
+    </Navbar.Collapse>
+    </Navbar>
       <GoogleAd slot="4653616521" timeout={1000} classNames="page-top" />
       <header className="App-header">
       <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.index}</p>

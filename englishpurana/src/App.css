@@ -26,7 +26,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #ff6600;
+  color: white;
+}
+
+.container {
+  columns: 1 auto;
 }
 
 .App-link {
@@ -47,7 +51,6 @@
 
 /* Create three unequal columns that floats next to each other */
 .column {
-
   padding: 10px;
 }
 
