@@ -120,7 +120,7 @@ function PuranaIndex({propOne, setPage}){
 
       <img src={logo} className="App-logo" alt="logo" />
 
-      <p className='red-text-shadow' style={{textDecoration:"underline"}}>Puranas</p>
+      <p className='red-text-shadow' style={{textDecoration:"underline"}}>Simple Puranas</p>
 
       <input type="button" className="btn btn-primary" value="Start Reading" onClick={() => goNext()}></input>
 

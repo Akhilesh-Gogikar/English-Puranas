@@ -35,6 +35,7 @@ function Login({propOne, updateUserId}) {
     <div className="App">
     <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
+    <p style={{textDecoration:"underline"}}>Simple Puranas</p>
       <FirebaseAuthProvider {...config} firebase={firebase}>
       <div>
       <div>
