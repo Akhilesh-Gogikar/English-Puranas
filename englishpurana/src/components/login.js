@@ -36,25 +36,42 @@ function Login({propOne, updateUserId}) {
     <div className="App">
     <Navbar bg="warning" variant="light">
     <Navbar.Brand href="/" >
-      <img
-        alt=""
-        src={logo}
-        width="30"
-        height="30"
-        className="d-inline-block align-top"
-      />{' '}
+    <img
+      alt=""
+      src={logo}
+      width="35"
+      height="35"
+      className="d-inline-block align-top"
+    />{' '}
       Simple Puranas
     </Navbar.Brand>
     <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
-    <Navbar.Text>
-    Signed in as: <a href="#login">{propOne.userId.displayName}</a>
-    </Navbar.Text>
+  <Navbar.Brand type="button" className="btn btn-link" style={{color:"white"}}>
+  <a href="about" style={{color:"Brown"}}>About</a>
+  </Navbar.Brand>
+  <Navbar.Text>
+&nbsp;&nbsp;
+  </Navbar.Text>
+  <Navbar.Text>
+  <img
+    alt=""
+    src={propOne.userId.photoURL}
+    width="50"
+    height="50"
+    class=""
+    className="d-inline-block align-top"
+    style={{borderRadius: "50%"}}
+  />{' '}
+  <br />
+  <a href="login">{propOne.userId.displayName}</a>
+  </Navbar.Text>
   </Navbar.Collapse>
   </Navbar>
     <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
-    <p style={{textDecoration:"underline"}}>Simple Puranas</p>
+    <p className="mb-0 h1" style={{textDecoration:"underline", color:"yellow"}}>Simple Puranas</p>
+    <br/>
       <FirebaseAuthProvider {...config} firebase={firebase}>
       <div>
       <div>
@@ -72,11 +89,8 @@ function Login({propOne, updateUserId}) {
         </button>
         <FirebaseAuthConsumer>
           {({ isSignedIn, user, providerId }) => {
-            console.log(isSignedIn);
             if(isSignedIn && userdata==null){
-              console.log(user);
               setUserdata(user);
-              console.log(userdata)
               updateUserId(user);
             }
             //

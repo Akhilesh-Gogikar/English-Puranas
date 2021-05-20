@@ -9,6 +9,9 @@ import { getPage } from "../redux/selectors";
 import GoogleAd from './googleAds';
 import Navbar from "react-bootstrap/Navbar";
 import logo from '../logo.png';
+import database from "./firebaseDB"
+
+
 
 import {
   FacebookShareCount
@@ -46,7 +49,7 @@ const AsyncImage = (props) => {
     }, [props.src]);
     if (loadedSrc === props.src) {
         return (
-            <img {...props} style={{width:"100%"}}/>
+            <img {...props} className="img-fluid"/>
         );
     }
     return null;
@@ -56,11 +59,54 @@ function Puranas({propOne, setPage}) {
 
   const history = useHistory();
 
+    const [userdata, setUserData] = useState({});
+    const [karma, setKarma] = useState(0);
+
+  // console.log(userdata)
+
   useEffect(() => {
     if (propOne.userId === ""){
       history.push('login');
     }
   }, [])
+
+  useEffect(() => {
+  if (propOne.userId != ""){
+    // console.log("Creating a new user in rtdb")
+
+      const userRef = database.ref('users')
+
+      userRef.orderByChild("uid").equalTo(propOne.userId.uid).once("value",snapshot => {
+      if (snapshot.exists()){
+        const userData = snapshot.val();
+        // console.log("exists!");
+        setUserData(userData);
+        for (let id in userData){
+          // console.log(userData[id]);
+
+          var new_karma = userData[id].karma + Math.ceil(propOne.session.length*(propOne.session.length+1)*0.5);
+          // console.log(new_karma)
+          setKarma(new_karma);
+        }
+
+      } else {
+
+        const data = {
+          displayName: propOne.userId.displayName,
+          email: propOne.userId.email,
+          photoURL: propOne.userId.photoURL,
+          uid: propOne.userId.uid,
+          phoneNumber: propOne.userId.phoneNumber,
+          karma:0,
+          session:[],
+          ts:Date.now()
+        }
+        userRef.push(data)
+      }
+  });
+
+  }
+}, [userdata, propOne])
 
   const [url, setUrl] = useState("https://raw.githubusercontent.com/Akhilesh-Gogikar/English-Puranas/master/puranas_jsons/"+propOne.currentPage+".json")
   const [error, setError] = useState(null);
@@ -70,9 +116,25 @@ function Puranas({propOne, setPage}) {
 
   const goIndex = () => {
     history.push('index');
+    const userRef = database.ref('users');
+    userRef.orderByChild("uid").equalTo(propOne.userId.uid).once("value",snapshot => {
+    if (snapshot.exists()){
+      for (let id in userdata){
+         userRef.child(id).update({karma: karma, session: propOne.session, ts:Date.now()});
+       }
+     }
+   });
   }
 
   const goNext = () => {
+    const userRef = database.ref('users');
+    userRef.orderByChild("uid").equalTo(propOne.userId.uid).once("value",snapshot => {
+    if (snapshot.exists()){
+      for (let id in userdata){
+         userRef.child(id).update({karma: karma, session: propOne.session, ts:Date.now()});
+       }
+     }
+   });
     if(items["next"]){
     setPage(items["next"]);
     var new_url = "https://raw.githubusercontent.com/Akhilesh-Gogikar/English-Puranas/master/puranas_jsons/"+items["next"]+".json"
@@ -87,7 +149,7 @@ function Puranas({propOne, setPage}) {
       .then( res => res.json())
       .then(
         (result) => {
-          console.log(result)
+          // console.log(result)
           setIsLoaded(true);
           setItems(result);
         },
@@ -106,6 +168,14 @@ function Puranas({propOne, setPage}) {
 
   // stop audio sound
   const goPrev = () => {
+    const userRef = database.ref('users');
+    userRef.orderByChild("uid").equalTo(propOne.userId.uid).once("value",snapshot => {
+    if (snapshot.exists()){
+      for (let id in userdata){
+         userRef.child(id).update({karma: karma, session: propOne.session, ts:Date.now()});
+       }
+     }
+   });
     if(items["prev"]){
       setPage(items["next"]);
     new_url = "https://raw.githubusercontent.com/Akhilesh-Gogikar/English-Puranas/master/puranas_jsons/"+items["prev"]+".json"
@@ -119,7 +189,7 @@ function Puranas({propOne, setPage}) {
       .then( res => res.json())
       .then(
         (result) => {
-          console.log(result)
+          // console.log(result)
           setIsLoaded(true);
           setItems(result);
         },
@@ -154,7 +224,7 @@ function Puranas({propOne, setPage}) {
       )
   }, [url])
 
-  console.log(items['text'])
+  // console.log(items['text'])
 
   if (error) {
     return <div className='App' >
@@ -167,45 +237,73 @@ function Puranas({propOne, setPage}) {
     return (
       <div className='App' >
       <Navbar bg="warning" variant="light">
-      <Navbar.Brand href="/index" >
-        <img
-          alt=""
-          src={logo}
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
+      <img
+        alt=""
+        src={logo}
+        width="70"
+        height="70"
+        className="d-inline-block align-top"
+      />{' '}
+      <Navbar.Brand href="/" >
+
         Simple Puranas
       </Navbar.Brand>
       <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
-      <Navbar.Text>
-      Signed in as: <br/><a href="#login">{propOne.userId.displayName}</a>
-      </Navbar.Text>
+    <Navbar.Brand type="button" className="btn btn-link" style={{color:"white"}}>
+    <a href="about" style={{color:"Brown"}}>About</a>
+    </Navbar.Brand>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text type="button" className="btn btn-success" style={{color:"white"}}>
+    Karma Points<br/><a href="login" className="mb-0 h1" style={{color:"white"}}>{karma}</a>
+    </Navbar.Text>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text>
+    <img
+      alt=""
+      src={propOne.userId.photoURL}
+      width="50"
+      height="50"
+      class=""
+      className="d-inline-block align-top"
+      style={{borderRadius: "50%"}}
+    />{' '}
+    <br />
+    <a href="login">{propOne.userId.displayName}</a>
+    </Navbar.Text>
+
     </Navbar.Collapse>
     </Navbar>
       <GoogleAd slot="4653616521" timeout={1000} classNames="page-top" />
       <header className="App-header">
       <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.index}</p>
-      <p className='red-text-shadow' style={{textDecoration:"underline"}}>{items.title}</p>
+      <p className='red-text-shadow' className="mb-0 h1" style={{textDecoration:"underline", color:"yellow"}}>{items.title}</p>
       <div className='row'>
-          <div className='column left'>
-          </div>
 
-          <div className='middle'>
+          <div>
 
 
             <p/>
             <AsyncImage src={imgurl} />
             <p/>
-            <div>{ items.text.map(notification => <p className='red-text-shadow'>{ notification }</p>) }</div>
+            <div>
+            <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
+            </div>
+            <div>{ items.text.map(notification => <p className='red-text-shadow' style={{padding: "5px 50px 10px 50px"}}>{ notification }</p>) }</div>
 
           </div>
 
-          <div className='column right'>
-
-          </div>
-
+      </div>
+      <div>
       </div>
       <div class="d-flex" >
         <div style={{flex:0.5}}>
@@ -294,7 +392,7 @@ function Puranas({propOne, setPage}) {
 }
 
 function mapStateToProps(state) {
-  console.log(state.stateManager)
+  // console.log(state.stateManager)
   return { propOne: state.stateManager };
 }
 

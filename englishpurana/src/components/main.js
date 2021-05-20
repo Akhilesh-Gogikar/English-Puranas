@@ -6,6 +6,7 @@ import Signup from './login';
 import Puranas from './puranas';
 // import Analytics from './Stats';
 import PuranaIndex from './index';
+import About from './about';
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
       <Route exact path='/login' component={Signup}></Route>
       <Route exact path='/puranas' component={Puranas}></Route>
       <Route exact path='/index' component={PuranaIndex}></Route>
+      <Route exact path='/about' component={About}></Route>
     </Switch>
     </BrowserRouter>
   );

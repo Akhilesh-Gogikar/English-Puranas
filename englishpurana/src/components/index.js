@@ -13,8 +13,13 @@ import GoogleAd from './googleAds';
 
 import logo from '../logo.png';
 import Navbar from "react-bootstrap/Navbar";
+import database from "./firebaseDB"
 
 function PuranaIndex({propOne, setPage}){
+
+  const [userdata, setUserData] = useState({});
+  const [last, setLast] = useState('1');
+  const [karma, setKarma] = useState(0);
 
   useEffect(() => {
     if (propOne === ""){
@@ -22,7 +27,7 @@ function PuranaIndex({propOne, setPage}){
     }
   }, [])
 
-  console.log(propOne)
+  // console.log(propOne)
 
   const history = useHistory();
 
@@ -36,6 +41,45 @@ function PuranaIndex({propOne, setPage}){
   const [purana, setPurana] = useState([]);
   const [title, setTitle] = useState('Puranas');
 
+  useEffect(() => {
+  if (propOne != ""){
+    // console.log("Creating a new user in rtdb")
+
+      const userRef = database.ref('users')
+
+      userRef.orderByChild("uid").equalTo(propOne.uid).once("value",snapshot => {
+      if (snapshot.exists()){
+        const userData = snapshot.val();
+        // console.log("exists!");
+        setUserData(userData);
+        // console.log(userData)
+        for (let id in userData){
+          // console.log(userData[id]);
+          setKarma(userData[id].karma);
+          const lastItem = userData[id].session[userData[id].session.length - 1];
+          setLast(lastItem);
+        }
+
+      } else {
+
+        const data = {
+          displayName: propOne.displayName,
+          email: propOne.email,
+          photoURL: propOne.photoURL,
+          uid: propOne.uid,
+          phoneNumber: propOne.phoneNumber,
+          karma:0,
+          session:['1'],
+          ts:Date.now()
+        }
+        userRef.push(data)
+        setUserData(data);
+      }
+  });
+
+  }
+}, [userdata, propOne])
+
   const goNext = (props) => {
         let path = `puranas`;
     if (props && items.hasOwnProperty(props.title)){
@@ -48,8 +92,10 @@ function PuranaIndex({propOne, setPage}){
         setPage(props.index)
         history.push(path);
       } else {
-        setPage('1');
-    history.push(path);
+        // console.log(userdata);
+
+          setPage(last);
+          history.push(path);
       }
       // Set the state in redux to the chapter in puran and redirect to /puranas
     }
@@ -123,21 +169,48 @@ function PuranaIndex({propOne, setPage}){
 
       <div className='App' >
       <Navbar bg="warning" variant="light">
+      <img
+        alt=""
+        src={logo}
+        width="70"
+        height="70"
+        className="d-inline-block align-top"
+      />{' '}
       <Navbar.Brand href="/" >
-        <img
-          alt=""
-          src={logo}
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
+
         Simple Puranas
       </Navbar.Brand>
       <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
-      <Navbar.Text>
-      Signed in as: <br/><a href="#login">{propOne.displayName}</a>
-      </Navbar.Text>
+    <Navbar.Brand type="button" className="btn btn-link" style={{color:"white"}}>
+    <a href="about" style={{color:"Brown"}}>About</a>
+    </Navbar.Brand>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text type="button" className="btn btn-success" style={{color:"white"}}>
+    Karma Points<br/><a href="login" className="mb-0 h1" style={{color:"white"}}>{karma}</a>
+    </Navbar.Text>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text>
+&nbsp;&nbsp;
+    </Navbar.Text>
+    <Navbar.Text>
+    <img
+      alt=""
+      src={propOne.photoURL}
+      width="50"
+      height="50"
+      class=""
+      className="d-inline-block align-top"
+      style={{borderRadius: "50%"}}
+    />{' '}
+    <br />
+    <a href="#login">{propOne.displayName}</a>
+    </Navbar.Text>
+
     </Navbar.Collapse>
     </Navbar>
             <GoogleAd slot="4653616521" timeout={1000} classNames="page-top" />
@@ -171,7 +244,7 @@ function PuranaIndex({propOne, setPage}){
 }
 
 function mapStateToProps(state) {
-  console.log(state.stateManager)
+  // console.log(state.stateManager)
   return { propOne: state.stateManager.userId};
 }
 
