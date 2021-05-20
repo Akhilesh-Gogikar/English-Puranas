@@ -10,6 +10,24 @@ import GoogleAd from './googleAds';
 import Navbar from "react-bootstrap/Navbar";
 import logo from '../logo.png';
 
+import {
+  FacebookShareCount
+} from "react-share";
+
+import {
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  WhatsappIcon
+} from "react-share";
+
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton
+} from "react-share";
+
 const AsyncImage = (props) => {
     const [loadedSrc, setLoadedSrc] = React.useState(null);
     React.useEffect(() => {
@@ -203,14 +221,65 @@ function Puranas({propOne, setPage}) {
         </div>
 
         <div style={{flex:0.5}}>
-        <input type="button" className="btn btn-danger" value="Index" style={{float:"center"}} onClick={goIndex}></input>
+        <TwitterShareButton url="https://www.simplepuranas.com/" title={items.title} via="https://www.simplepuranas.com/" hashtag="#Dharmic #Hindu #Puranas">
+          <TwitterIcon logoFillColor="white" size={45} round={true}/>
+        </TwitterShareButton>
         </div>
+
+        <div style={{flex:2}}>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+
+        </div>
+
+        <div style={{flex:0.5}}>
+        <WhatsappShareButton url="https://www.simplepuranas.com/" quote={items.title}>
+          <WhatsappIcon logoFillColor="white" size={45} round={true}/>
+        </WhatsappShareButton>
+        </div>
+
         <div style={{flex:2}}>
         <p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </p>
+        </div>
+
+        <div style={{flex:0.5}}>
+        <input type="button" className="btn btn-danger" value="Index" onClick={goIndex}></input>
+        </div>
+
+        <div style={{flex:2}}>
+        <p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+        </div>
+
+        <div style={{flex:0.5}}>
+        <FacebookShareButton url="https://www.simplepuranas.com/" quote={items.title} hashtag="#Dharmic #Hindu #Puranas">
+          <FacebookIcon logoFillColor="white" size={45} round={true}/>
+        </FacebookShareButton>
+        </div>
+
+        <div style={{flex:2}}>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
 
         </div>
+
+        <div style={{flex:0.5}}>
+        <LinkedinShareButton url="https://www.simplepuranas.com/" title="Simple Puranas - Hindu Ancient Stories" summary={items.title} source="https://www.simplepuranas.com/">
+          <LinkedinIcon logoFillColor="white" size={45} round={true}/>
+        </LinkedinShareButton>
+        </div>
+
+        <div style={{flex:2}}>
+        <p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+        </div>
+
         <div style={{flex:0.5}}>
 
         <input type="button" className="btn btn-primary " style={{float:"right"}} value="Next" onClick={goNext}></input>
