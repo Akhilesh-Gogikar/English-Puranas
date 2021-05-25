@@ -79,13 +79,36 @@ function Login({propOne, updateUserId}) {
 
       </p>
       </div>
-        <button className="btn btn-warning"
+        <button className="btn btn-primary"
           onClick={() => {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(googleAuthProvider);
           }}
         >
           Sign In with Google
+        </button>
+        <p>
+        &nbsp;
+        </p>
+        <button
+        className="btn btn-success"
+          data-testid="signin-anon"
+          onClick={() => {
+            firebase.auth().signInAnonymously();
+          }}
+        >
+          Sign In Anonymously
+        </button>
+        <p>
+        &nbsp;
+        </p>
+        <button
+        className="btn btn-danger"
+          onClick={() => {
+            firebase.auth().signOut();
+          }}
+        >
+          Sign Out
         </button>
         <FirebaseAuthConsumer>
           {({ isSignedIn, user, providerId }) => {
@@ -101,7 +124,7 @@ function Login({propOne, updateUserId}) {
           <IfFirebaseAuthed>
             {() => {
               // goHome();
-              return <div><p>You are authenticated</p>
+              return <div><p>Click continue to access Simple Puranas</p>
               <input type="button" className="btn btn-primary" value="Continue" onClick={goHome}></input>
           </div>;
             }}

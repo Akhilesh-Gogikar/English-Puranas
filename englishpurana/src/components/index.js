@@ -208,7 +208,7 @@ function PuranaIndex({propOne, setPage}){
       style={{borderRadius: "50%"}}
     />{' '}
     <br />
-    <a href="#login">{propOne.displayName}</a>
+    <a href="login">{propOne.displayName}</a>
     </Navbar.Text>
 
     </Navbar.Collapse>
