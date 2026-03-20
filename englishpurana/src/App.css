@@ -1,32 +1,231 @@
 .App {
   text-align: center;
   width: 100%;
-  height:100%;
+  min-height: 100vh;
   color: #ff6600;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-shell {
+  background:
+    radial-gradient(circle at top, rgba(255, 222, 173, 0.32), transparent 30%),
+    linear-gradient(180deg, #5d1f00 0%, #7a2f00 28%, #9f4300 65%, #b14e00 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-navbar {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
-.App-header {
-  background-color: #ff6600;
-  min-height: 100vh;
-  width: 100%;
-  height: 100%;
+.brand-lockup,
+.nav-link-button a {
+  font-weight: 700;
+}
+
+.landing-page,
+.strategy-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 2rem;
+  padding: 2rem clamp(1rem, 2vw, 2rem) 4rem;
+}
+
+.hero-panel,
+.content-section {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.hero-copy,
+.hero-highlight-card,
+.content-section,
+.idea-card,
+.franchise-card,
+.interactive-card,
+.timeline-card,
+.kpi-card,
+.principle-card,
+.stack-card,
+.audience-row {
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hero-copy,
+.hero-highlight-card,
+.content-section {
+  background: rgba(255, 248, 240, 0.92);
+  color: #4a1e00;
+}
+
+.hero-copy,
+.hero-highlight-card {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  text-align: left;
+}
+
+.hero-copy h1,
+.strategy-hero h1 {
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.05;
+  margin: 0.5rem 0 1rem;
+}
+
+.hero-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow,
+.mini-label {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.eyebrow {
+  color: #a04800;
+  font-size: 0.8rem;
+}
+
+.mini-label {
+  color: #c45a00;
+  font-size: 0.72rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-highlight-card ul,
+.timeline-card ul,
+.interactive-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.content-section {
+  padding: 2rem;
+  text-align: left;
+}
+
+.alt-surface {
+  background: rgba(255, 240, 226, 0.96);
+}
+
+.section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.section-heading h2 {
+  color: #552200;
+  margin: 0.4rem 0;
+}
+
+.goal-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.goal-tab {
+  border: 1px solid rgba(160, 72, 0, 0.22);
+  background: #fff7f1;
+  color: #552200;
+  border-radius: 18px;
+  padding: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.goal-tab.active {
+  background: linear-gradient(135deg, #ffcf9b, #fff2e2);
+  border-color: rgba(160, 72, 0, 0.5);
+}
+
+.idea-card,
+.franchise-card,
+.interactive-card,
+.timeline-card,
+.kpi-card,
+.principle-card,
+.stack-card,
+.audience-row {
+  background: #fffdfb;
+  color: #552200;
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.idea-pill {
+  background: #fff0e1;
+  color: #8e3c00;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+.franchise-grid,
+.interactive-grid,
+.timeline-grid,
+.kpi-grid,
+.principles-list,
+.stack-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.franchise-grid,
+.kpi-grid,
+.stack-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.interactive-grid,
+.timeline-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.principles-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.metric-line,
+.audience-meta {
+  color: #8e3c00;
+}
+
+.audience-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audience-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+  align-items: start;
 }
 
 .container {
@@ -42,14 +241,12 @@
   color: white;
 }
 
-/* Clear floats after the columns */
 .row:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
 
-/* Create three unequal columns that floats next to each other */
 .column {
   padding: 10px;
 }
@@ -68,12 +265,61 @@
 
 .h4 {
   font-size: calc(200px + 2vmin);
-  textDecorationLine: 'underline';
+  text-decoration-line: underline;
 }
 
-.filldiv{
-  position:absolute;
-  bottom:20px;
+.filldiv {
+  position: absolute;
+  bottom: 20px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #ff6600;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-panel,
+  .goal-tabs,
+  .franchise-grid,
+  .interactive-grid,
+  .timeline-grid,
+  .kpi-grid,
+  .principles-list,
+  .stack-grid,
+  .audience-row {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-page,
+  .strategy-page {
+    padding-inline: 1rem;
+  }
+
+  .content-section,
+  .hero-copy,
+  .hero-highlight-card {
+    padding: 1.25rem;
+  }
 }
 
 @keyframes App-logo-spin {
