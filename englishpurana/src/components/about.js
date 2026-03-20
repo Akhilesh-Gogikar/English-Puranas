@@ -1,84 +1,159 @@
-
-import Button from "react-bootstrap/Button";
-// import Text from 'react-text';
-import logo from '../logo.png';
-import Main from "./main.js"
-import { useHistory } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import { useHistory } from 'react-router-dom';
 import '../App.css';
-import Navbar from "react-bootstrap/Navbar";
+import logo from '../logo.png';
+import {
+  audienceSegments,
+  ideaPrinciples,
+  interactiveProducts,
+  rolloutPlan,
+} from '../content_deliveryIdeas';
 
 function About() {
   const history = useHistory();
 
-  const goLogin = () => {
-    history.push('/');
-  }
   return (
-    <div className="App">
-    <Navbar bg="warning" variant="light">
-    <Navbar.Brand href="/" >
-    <img
-      alt=""
-      src={logo}
-      width="35"
-      height="35"
-      className="d-inline-block align-top"
-    />{' '}
-      Simple Puranas
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  <Navbar.Collapse className="justify-content-end">
-  <Navbar.Brand type="button" className="btn btn-link" style={{color:"white"}}>
-  <a href="about" style={{color:"Brown"}}>About</a>
-  </Navbar.Brand>
-  <Navbar.Text>
-&nbsp;&nbsp;
-  </Navbar.Text>
-    <Navbar.Text>
-    <Button variant="outline-light" href="/login">Signin</Button>
-    </Navbar.Text>
-  </Navbar.Collapse>
-  </Navbar>
-    <header className="App-header" style={{padding: "5px 50px 10px 50px"}}>
-    <br/>
-      <p className="mb-0 h1" style={{textDecoration:"underline", color:"yellow"}}>Simple Puranas</p>
-      <br/>
-      <p style={{textDecoration:"underline", color:"yellow"}}>Goal of the Simple Puranas</p>
-      <p>The ancient puranas contain stories written as verses in the times of sages</p>
-      <p>These stories were passed down from generations through scriptures and plays</p>
-      <p>We are slowly losing touch of these ancient stories which have much to teach us in current times as they were available in touch to translate sanskrit and hard to read books, scriptures or pdfs.</p>
-      <p>Simple puranas was designed as a tool to help interested readers of all age groups to easily access the content of these documents.</p>
-      <p>We aim to utilize modern development tools to provide this content in an manner which is easily assimilable and fun to peruse</p>
-      <br/>
-      <p style={{textDecoration:"underline", color:"yellow"}}>Source of simple puranas</p>
-      <p>The source of the content for simple puranas comes from a pdf which was one of the earliest attempts to digitise the stories in the puranas</p>
-      <p>The dharmic scriptures team translated and compiled the content of these stories in 2002</p>
-      <p>Puranas are so old that an author is not known, so are the vedas and the upanishads</p>
-      <p>Hindu scriptures have been passed down through generations without ownership of content</p>
-      <p>Simple puranas is an effort to carry forward this legacy so that future generations can benefit from these stories</p>
-      <br/>
-      <p style={{textDecoration:"underline", color:"yellow"}}>Karma point system</p>
-      <p>The Karma system is hindu tradition which say good and bad deeds are tracked by the creator of the universe and rewarded as such</p>
-      <p>We created a simple point system to keep the readers motivate, the score of reading a page is the sum of the points scored for all the pages read before it in the current session</p>
-      <p>The puranas are dense, and we encourage the user to read as many puranas, chapters and sections, as they can in a single session</p>
-      <p>Quizzes will be made available and online competitions will be held to boost the karma points of the dharmic readers</p>
-      <p>It is very easy to score good karma and very hard to incur bad karma as long as the teachings of the puranas are kep close to heart</p>
-      <br/>
-      <p style={{textDecoration:"underline", color:"yellow"}}>How to use</p>
-      <p>Login with your Gmail id and we will create your profile</p>
-      <p>Check the index for the purana you want to read</p>
-      <p>Start from the top and read to the bottom of each page</p>
-      <p>Meditate on the beauty of any image you find extremely pleasing, this will help you build a love for god and calm your heart, mind and soul.</p>
-      <p>Reflect on the meaning of the section and try to understand any shloka or complicated word</p>
-      <p>Click next to go the next section, keep conscious track of which section you are at, so that you may revisit it later</p>
-      <p>Share any section you particularly like on social media through the various buttons made available</p>
-      <br/>
-      <p style={{textDecoration:"underline", color:"yellow"}}>Jai Shree Krishna, Jai Shree Ram, Om Namah Shivay!</p>
-      <input type="button" className="btn btn-primary" value="Home" onClick={goLogin}></input>
-    </header>
+    <div className="App app-shell">
+      <Navbar bg="warning" variant="light" className="app-navbar">
+        <Navbar.Brand href="/" className="brand-lockup">
+          <img
+            alt="Simple Puranas logo"
+            src={logo}
+            width="35"
+            height="35"
+            className="d-inline-block align-top"
+          />{' '}
+          Simple Puranas
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Brand className="btn btn-link nav-link-button">
+            <a href="about" style={{ color: 'brown' }}>
+              Roadmap
+            </a>
+          </Navbar.Brand>
+          <Navbar.Text>
+            <Button variant="outline-light" href="/login">
+              Sign in
+            </Button>
+          </Navbar.Text>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <main className="strategy-page">
+        <section className="content-section strategy-hero">
+          <span className="eyebrow">Product roadmap</span>
+          <h1>How to evolve Simple Puranas from archive into ecosystem.</h1>
+          <p className="hero-lead">
+            The strongest opportunity in this repository is not just preserving text. It is packaging Purana
+            wisdom for different ages, contexts, and rituals without losing reverence or clarity.
+          </p>
+          <div className="hero-actions">
+            <Button variant="primary" onClick={() => history.push('/')}>
+              Back to overview
+            </Button>
+            <Button variant="outline-light" onClick={() => history.push('/login')}>
+              Open the reader
+            </Button>
+          </div>
+        </section>
+
+        <section className="content-section alt-surface">
+          <div className="section-heading">
+            <span className="eyebrow">Operating principles</span>
+            <h2>Guidelines for building the next version of the product.</h2>
+          </div>
+          <div className="principles-list">
+            {ideaPrinciples.map((principle) => (
+              <div className="principle-card" key={principle}>
+                {principle}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section">
+          <div className="section-heading">
+            <span className="eyebrow">Audience map</span>
+            <h2>Eight addressable segments already identified in the repo.</h2>
+            <p>
+              Each segment needs different pacing, packaging, and depth even though they draw from the same
+              source archive.
+            </p>
+          </div>
+          <div className="audience-table">
+            {audienceSegments.map((segment) => (
+              <article className="audience-row" key={segment.id}>
+                <div>
+                  <h3>{segment.name}</h3>
+                  <p>{segment.promise}</p>
+                </div>
+                <div>
+                  <p className="audience-meta"><strong>Format:</strong> {segment.format}</p>
+                  <p className="audience-meta"><strong>Best for:</strong> {segment.bestFor.join(', ')}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section alt-surface">
+          <div className="section-heading">
+            <span className="eyebrow">Interactive product stack</span>
+            <h2>Three layers beyond static reading.</h2>
+          </div>
+          <div className="stack-grid">
+            <article className="stack-card">
+              <h3>1. Content layer</h3>
+              <p>Structured story pages, summaries, images, and scripture-linked metadata.</p>
+            </article>
+            <article className="stack-card">
+              <h3>2. Ritual layer</h3>
+              <p>Quizzes, family prompts, challenge sequences, and festival-based programming.</p>
+            </article>
+            <article className="stack-card">
+              <h3>3. Conversational layer</h3>
+              <p>Guided Q&amp;A, AI-avatar narration, age-adaptive prompts, and contextual recommendations.</p>
+            </article>
+          </div>
+          <div className="interactive-grid">
+            {interactiveProducts.map((product) => (
+              <article className="interactive-card" key={product.title}>
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+                <ul>
+                  {product.prompts.map((prompt) => (
+                    <li key={prompt}>{prompt}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section">
+          <div className="section-heading">
+            <span className="eyebrow">Execution cadence</span>
+            <h2>A realistic validate → deepen → scale sequence.</h2>
+          </div>
+          <div className="timeline-grid">
+            {rolloutPlan.map((phase) => (
+              <article className="timeline-card" key={phase.phase}>
+                <h3>{phase.phase}</h3>
+                <p>{phase.focus}</p>
+                <ul>
+                  {phase.actions.map((action) => (
+                    <li key={action}>{action}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
-
 
 export default About;
