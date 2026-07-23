@@ -1,6 +1,33 @@
-# Getting Started with Create React App
+# English Puranas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+English Puranas is a React reader for browsing English Purana sections by text,
+chapter, and section. It is useful for readers and developers who want a
+structured, browser-based way to explore Purana material with section navigation,
+images, sharing controls, and Firebase-backed reading state.
+
+The app loads bundled Purana JSON content, routes readers through index and
+section views, and stores user/session state through Firebase.
+
+## Quickstart
+
+```sh
+cd englishpurana
+npm ci
+NODE_OPTIONS=--openssl-legacy-provider npm start
+```
+
+Open `http://localhost:3000`, then use `/index` for the Purana index or
+`/puranas` for the reader route.
+
+For a production compile check, run
+`NODE_OPTIONS=--openssl-legacy-provider npm run build`.
+
+## Project Structure
+
+- `src/components/index.js` renders the Purana index and section list flow.
+- `src/components/puranas.js` renders section text, images, navigation, and sharing.
+- `src/dataClean.json` contains the bundled Purana content for 18 top-level texts.
+- `src/config.js` contains the Firebase project configuration used by the app.
 
 ## Available Scripts
 
