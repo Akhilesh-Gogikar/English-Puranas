@@ -24,6 +24,24 @@ state.
 - Reader view: `englishpurana/src/components/puranas.js`
 - Firebase setup: `englishpurana/src/config.js`
 
+## Cite or Share
+
+Use the repository URL when pointing readers to the React app, bundled JSON
+corpus, and supporting image assets:
+`https://github.com/Akhilesh-Gogikar/English-Puranas`
+
+```bibtex
+@software{gogikar_english_puranas,
+  author = {Gogikar, Akhilesh},
+  title = {English Puranas},
+  url = {https://github.com/Akhilesh-Gogikar/English-Puranas},
+  year = {2026}
+}
+```
+
+For academic use, verify text provenance separately; this repository is a
+software and content package, not a critical edition.
+
 ## Repository Status
 
 The main runnable app lives in `englishpurana/`. The root-level JSON and image
