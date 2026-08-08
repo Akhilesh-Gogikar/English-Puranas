@@ -97,20 +97,20 @@ export interface NodeJSAndCommonJS extends Linter.RulesRecord {
             ...Array<
                 | string
                 | {
-                      name: string;
-                      message?: string;
-                  }
+                    name: string;
+                    message?: string | undefined;
+                }
                 | Partial<{
-                      paths: Array<
-                          | string
-                          | {
-                                name: string;
-                                message?: string;
-                            }
-                      >;
-                      patterns: string[];
-                  }>
-            >
+                    paths: Array<
+                        | string
+                        | {
+                            name: string;
+                            message?: string | undefined;
+                        }
+                    >;
+                    patterns: string[];
+                }>
+            >,
         ]
     >;
 
